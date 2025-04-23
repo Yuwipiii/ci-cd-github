@@ -1,0 +1,25 @@
+name: GitHub CI/CD Demo
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t github-cicd-demo --build-arg CI_PROVIDER=GitHub .
+
+      - name: Save Docker image as artifact
+        run: docker save github-cicd-demo | gzip > github-image.tar.gz
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: github-docker-image
+          path: github-image.tar.gz
