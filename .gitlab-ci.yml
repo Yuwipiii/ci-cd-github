@@ -1,0 +1,22 @@
+stages:
+  - test
+  - build
+
+test_job:
+  stage: test
+  image: php:8.2-cli
+  script:
+    - php tests/search_test.php
+
+build_job:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - docker build -t gitlab-cicd-demo --build-arg CI_PROVIDER=GitLab .
+    - docker save gitlab-cicd-demo | gzip > gitlab-image.tar.gz
+  artifacts:
+    paths:
+      - gitlab-image.tar.gz
+  needs: [test_job]

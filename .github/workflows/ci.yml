@@ -12,6 +12,7 @@ jobs:
       - name: Run PHP tests
         run: php tests/search_test.php
 
+
   build:
     needs: test
     runs-on: ubuntu-latest
