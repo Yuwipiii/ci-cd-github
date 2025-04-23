@@ -18,8 +18,8 @@ jobs:
       - name: Save image to artifact
         run: docker save github-cicd-web-demo | gzip > image.tar.gz
 
-      - name: Upload image artifact
-        uses: actions/upload-artifact@v3
+      - name: Upload Docker image artifact
+        uses: actions/upload-artifact@v3.1.2
         with:
           name: docker-image
           path: image.tar.gz
