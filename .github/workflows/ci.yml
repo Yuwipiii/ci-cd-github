@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Run PHP tests
-        run: php tests/tests/search_test.php
+        run: php tests/search_test.php
 
   build:
     needs: test
