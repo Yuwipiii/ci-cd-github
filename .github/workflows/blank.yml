@@ -10,16 +10,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/upload-artifact@v3.1.2
+        uses: actions/checkout@v4
 
       - name: Build Docker image
         run: docker build -t github-cicd-web-demo --build-arg CI_PROVIDER=GitHub .
 
-      - name: Save image to artifact
-        run: docker save github-cicd-web-demo | gzip > image.tar.gz
+      - name: Save image to tar.gz
+        run: |
+          docker save github-cicd-web-demo | gzip > image.tar.gz
 
       - name: Upload Docker image artifact
-        uses: actions/upload-artifact@v3.1.2
+        uses: actions/upload-artifact@v4
         with:
           name: docker-image
           path: image.tar.gz
