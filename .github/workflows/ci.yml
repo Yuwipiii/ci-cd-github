@@ -26,3 +26,18 @@ jobs:
         with:
           name: github-docker-image
           path: github-image.tar.gz
+          
+  deploy_simulation:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚀 Starting deployment simulation
+        run: |
+          echo "🚀 Starting deployment simulation…"
+          echo " • Connecting to server…"
+          sleep 1
+          echo " • Copying files…"
+          sleep 1
+          echo " • Restarting services…"
+          sleep 1
+          echo "✅ Deployment simulation completed!"
