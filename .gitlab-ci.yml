@@ -1,6 +1,7 @@
 stages:
   - test
   - build
+  - deploy
 
 test_job:
   stage: test
@@ -20,3 +21,19 @@ build_job:
     paths:
       - gitlab-image.tar.gz
   needs: [test_job]
+
+simulate_deploy:
+  stage: deploy
+  image: alpine:latest
+  script:
+    - echo "🚀 Starting deployment simulation…"
+    - echo " • Подключаемся к серверу…"
+    - sleep 1
+    - echo " • Копируем файлы…"
+    - sleep 1
+    - echo " • Перезапускаем сервисы…"
+    - sleep 1
+    - echo "✅ Deployment simulation completed!"
+  when: manual     # можно запускать вручную из интерфейса
+  only:
+    - main
