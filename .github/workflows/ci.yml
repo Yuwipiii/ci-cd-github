@@ -18,13 +18,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/checkout@v4
       - name: Build Docker image
         run: docker build -t github-cicd-demo --build-arg CI_PROVIDER=GitHub .
       - name: Save Docker image
-      - name: Save Docker image
         run: docker save github-cicd-demo | gzip > github-image.tar.gz
-      - name: Upload artifact
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
